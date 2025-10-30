@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Exclusiva Lowi | Fibra + 2 Móviles por 30€</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de React y ReactDOM (Versión de Producción para mejor rendimiento) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Carga de Babel (Necesario para interpretar el JSX directamente en el navegador) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Fuente Inter para un look moderno -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        /* Estilos específicos para la estética */
+        .shadow-custom {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // --- COMIENZO DEL CÓDIGO REACT/JSX ---
+        
+        // ** Dependencias globales de React (se extraen directamente de la CDN) **
+        const { useState, useEffect } = React;
+        
+        // Simulación de iconos Lucide usando SVG inline (para mantener el código en un solo archivo HTML)
+        const Zap = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>;
+        const Wifi = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>;
+        const Smartphone = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>;
+        const Lock = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>;
+        const CheckCircle = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.05-8.54"></path><path d="M22 4L12 14.01l-3-3"></path></svg>;
+        const Gift = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>;
+        const MessageCircle = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-5.17 7.23L12 22l-3.83-3.27A8.38 8.38 0 0 1 3 11.5 8.5 8.5 0 0 1 11.5 3 8.38 8.38 0 0 1 21 11.5z"></path></svg>;
+        const User = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>;
+        const Clock = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>;
+        const Globe = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 0 20"></path></svg>;
+        
+
+
+        // --- CONFIGURACIÓN Y COLORES ---
+        const PRIMARY_COLOR = "bg-blue-600"; // Azul principal
+        const PRIMARY_COLOR_HOVER = "hover:bg-blue-700";
+        const SECONDARY_COLOR = "bg-green-500"; // Verde para el CTA final
+        const SECONDARY_COLOR_HOVER = "hover:bg-green-600";
+        const TEXT_COLOR = "text-gray-900";
+        // ** NO OLVIDES REEMPLAZAR ESTE TELÉFONO **
+        const WhatsAppLink = "https://wa.me/XXXXXXXXXX?text=Hola%2C%20estoy%20interesado%2Fa%20en%20la%20oferta%20EXCLUSIVA%20de%20Fibra%20%2B%202%20M%C3%B3viles%20por%2030%E2%82%AC.";
+        
+        // Componente para el Botón CTA principal
+        const WhatsAppButton = ({ text, className = '', color = PRIMARY_COLOR, hoverColor = PRIMARY_COLOR_HOVER }) => (
+          <a
+            href={WhatsAppLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              ${color} ${hoverColor} text-white font-extrabold text-lg py-3 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-[1.03]
+              flex items-center justify-center space-x-3 w-full sm:w-auto
+              ${className}
+            `}
+          >
+            <MessageCircle className="w-5 h-5" style={{ fill: 'white' }} />
+            <span>{text}</span>
+          </a>
+        );
+        
+        // ui/brindis.jsx (Toast/Notificación simulada para mejorar la UX - no usada, pero mantenida por estructura)
+        const ToastNotification = ({ message, isVisible }) => (
+          <div
+            className={`
+              fixed bottom-4 left-1/2 -translate-x-1/2 z-50 p-3 rounded-xl bg-gray-800 text-white shadow-lg transition-all duration-500
+              ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}
+              max-w-xs text-sm
+            `}
+          >
+            <div className="flex items-center space-x-2">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>{message}</span>
+            </div>
+          </div>
+        );
+        
+        
+        // --- COMPONENTES PRINCIPALES ---
+        
+        // componentes/Héroe.jsx & componentes/HeroImage.jsx (combinados)
+        const HeroSection = () => (
+          <header className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-100 to-blue-50 overflow-hidden">
+            <div className="absolute inset-x-0 top-0 text-center py-2 bg-blue-700 text-white text-xs md:text-sm font-medium tracking-wide z-10">
+                <span className="inline-flex items-center space-x-1">
+                    <Zap className="w-3 h-3 md:w-4 md:h-4 text-yellow-300" />
+                    <span>OFERTA EXCLUSIVA WEB - ¡POR TIEMPO LIMITADO!</span>
+                </span>
+            </div>
+        
+            <div className="container mx-auto px-4 relative z-10 pt-8">
+              <div className="text-center max-w-3xl mx-auto">
+                <h1 className={`text-4xl md:text-5xl lg:text-6xl font-extrabold ${TEXT_COLOR} leading-tight mb-4`}>
+                  2 Líneas Móvil <br /> + Fibra 600MB
+                </h1>
+                <p className={`text-xl md:text-2xl font-normal text-gray-700 mb-6`}>
+                  50GB para distribuir como quieras
+                </p>
+                <p className={`text-6xl md:text-7xl lg:text-8xl font-black text-blue-600 mb-8`}>
+                  30<span className="text-4xl align-top">€</span> <span className="text-4xl md:text-5xl">/mes</span>
+                </p>
+        
+                <WhatsAppButton
+                  text="Contactar por WhatsApp"
+                  className="mx-auto max-w-xs mb-10"
+                  color="bg-green-500"
+                  hoverColor="hover:bg-green-600"
+                />
+        
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                  <FeatureCard
+                    icon={Smartphone}
+                    title="2 Líneas Móviles"
+                    description="50GB para compartir y acumular."
+                    iconColor="text-blue-500"
+                  />
+                  <FeatureCard
+                    icon={Wifi}
+                    title="Fibra Óptica"
+                    description="Conexión de alta velocidad en casa."
+                    iconColor="text-blue-500"
+                  />
+                  <FeatureCard
+                    icon={Zap}
+                    title="Calidad Vodafone"
+                    description="Garantía de calidad de red Vodafone."
+                    iconColor="text-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </header>
+        );
+        
+        // Nuevo componente para las tarjetas de características en el Hero
+        const FeatureCard = ({ icon: Icon, title, description, iconColor }) => (
+          <div className="p-6 bg-white rounded-2xl shadow-xl flex flex-col items-center text-center border-b-4 border-blue-200 transition duration-300 hover:scale-105">
+            <div className={`p-3 rounded-full bg-blue-50 mb-4`}>
+              <Icon className={`w-8 h-8 ${iconColor}`} />
+            </div>
+            <h3 className={`text-lg font-bold ${TEXT_COLOR} mb-1`}>{title}</h3>
+            <p className="text-gray-600 text-sm">{description}</p>
+          </div>
+        );
+        
+        
+        // componentes/Características.jsx (Adaptado al nuevo estilo)
+        const DetailItem = ({ icon: Icon, title, description, iconBgColor }) => (
+          <div className="p-6 bg-white rounded-xl shadow-md border border-gray-100 flex items-start space-x-4 transition duration-300 hover:shadow-lg">
+            <div className={`p-3 rounded-full ${iconBgColor} flex-shrink-0`}>
+              <Icon className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className={`text-lg font-semibold ${TEXT_COLOR} mb-1`}>{title}</h3>
+              <p className="text-gray-600 text-sm">{description}</p>
+            </div>
+          </div>
+        );
+        
+        const FeaturesSection = () => (
+          <section className="py-16 md:py-20 bg-gray-50">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <h2 className={`text-3xl md:text-4xl font-extrabold text-center mb-10 ${TEXT_COLOR}`}>
+                Todo lo que <span className="text-blue-600">Necesitas</span>
+              </h2>
+              <p className="text-center text-gray-700 text-lg mb-12">
+                Una oferta completa diseñada para que disfrutes al máximo.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <DetailItem
+                  icon={Smartphone}
+                  title="Habla sin límites."
+                  description=" Dos líneas móviles con llamadas ilimitadas para que te comuniques sin preocuparte por el tiempo ni el coste."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Gift}
+                  title="50GB de Datos"
+                  description="Datos que se adaptan a ti. 50GB para compartir entre ambas líneas. Acumula, distribuye y navega como quieras. Tú decides."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Lock}
+                  title="Sin Permanencia"
+                  description="Libertad desde el primer día. Sin permanencia en las líneas móviles. Solo 3 meses con la fibra. Sin ataduras, sin sorpresas."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Clock}
+                  title="Activación Rápida"
+                  description="Activa tu tarifa y empieza a disfrutar en menos de 24 horas. Sin esperas, sin complicaciones."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={User}
+                  title="Ideal para Familias"
+                  description="Comparte lo que importa. Dos líneas móviles para ti y quien más quieres. Perfecto para hogares que valoran la conexión."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Wifi}
+                  title="Fibra de 600MB"
+                  description="Internet que vuela. Fibra óptica de 600MB para tu casa o negocio. Estabilidad, velocidad y rendimiento sin interrupciones."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Zap}
+                  title="Red Vodafone"
+                  description="Cobertura premium. Navega, llama y conecta con la calidad de la red Vodafone. Fiable, potente y en toda España."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={Globe}
+                  title="Roaming incluido"
+                  description="Tu tarifa viaja contigo ¿Te vas a Francia, Italia o Alemania? Navega con 5G y usa tus datos como si estuvieras en casa. Roaming incluido sin coste adicional."
+                  iconBgColor="bg-blue-500"
+                />
+                <DetailItem
+                  icon={() => (
+                    <div className="w-6 h-6 flex items-center justify-center">
+                      <img
+                        src="/image/lowi.png"
+                        alt="Logo LOWI"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
+                  title="Lowi"
+                  description={
+                    <>
+                      Cobertura premium en toda España, sin permanencia y activación en 24h.  
+                      <span className="block mt-2 font-semibold text-blue-600 cursor-pointer hover:underline">
+                        👉 Contactar con un asesor
+                      </span>
+                    </>
+                  }
+                  iconBgColor="bg-red-500"
+                />         
+              </div>
+            </div>
+          </section>
+        );
+        
+        
+        // componentes/Llamada a la acción.jsx & componentes/CTACSection.jsx (combinados)
+        const PriceDetailCTA = () => (
+          <section className="py-16 md:py-24 bg-gray-100">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <h2 className={`text-3xl md:text-4xl font-extrabold mb-4 ${TEXT_COLOR}`}>
+                Precio <span className="text-blue-600">Inmejorable</span>
+              </h2>
+              <p className="text-lg text-gray-700 mb-10">
+                Todo incluido, sin sorpresas.
+              </p>
+        
+              {/* Bloque de oferta detallada similar al ejemplo */}
+              <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div className="absolute -top-4 -right-4 bg-white text-blue-600 text-xs font-bold px-4 py-2 rounded-lg rotate-12 shadow-md">
+                    OFERTA EXCLUSIVA
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  La mejor relación calidad-precio
+                </h3>
+                <p className="text-white text-sm opacity-90 mb-6">
+                  Solo disponible en esta landing y por tiempo limitado.
+                </p>
+        
+                <p className="text-6xl md:text-7xl font-black text-white mb-6">
+                  30<span className="text-3xl align-top">€</span> <span className="text-3xl font-normal">/mes</span>
+                </p>
+                <p className="text-white text-base mb-8">
+                  IVA incluido
+                </p>
+        
+                <div className="bg-white p-6 rounded-2xl text-left shadow-lg">
+                  <ul className="space-y-3 mb-8">
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>2 líneas móviles con 50GB para compartir y acumular.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Fibra de 600MB de alta velocidad.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Llamadas ilimitadas.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Sin permanencia en móvil.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Atención al cliente 24/7.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Instalación gratuita.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Sin costes ocultos.</span>
+                    </li>
+                    <li className="flex items-center space-x-3 text-gray-800 font-medium">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span>Cobertura y calidad de la red Vodafone.</span>
+                    </li>
+                  </ul>
+        
+                  <WhatsAppButton
+                    text="¡Quiero esta Oferta!"
+                    className="w-full"
+                    color={SECONDARY_COLOR}
+                    hoverColor={SECONDARY_COLOR_HOVER}
+                  />
+                  <p className="text-xs text-gray-500 mt-3">
+                    Completa tu propuesta por WhatsApp y empieza a disfrutar de todos los beneficios.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+        
+        
+        // componentes/Pie de página.jsx
+        const FinalCTA = () => (
+          <section className="bg-blue-800 py-16 md:py-20 text-center text-white">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+                ¿Listo para Ahorrar?
+              </h2>
+              <p className="text-xl text-blue-100 mb-10">
+                Contáctanos ahora por WhatsApp y empieza a disfrutar de esta increíble oferta.
+              </p>
+              <WhatsAppButton
+                text="Contactar Ahora"
+                className="mx-auto max-w-xs"
+                color="bg-red"
+                hoverColor="hover:bg-gray-100"
+              >
+                <span className="text-blue-600">Contactar Ahora</span>
+              </WhatsAppButton>
+            </div>
+          </section>
+        );
+        
+        const Footer = () => (
+          <footer className="bg-gray-900 py-8 text-center text-sm text-gray-400">
+            <div className="container mx-auto px-4">
+              <p>
+                Oferta gestionada por [Tu Nombre/Agencia]. Servicio de Lowi (Cobertura Vodafone).
+              </p>
+              <p className="mt-2">
+                Precios con IVA incluido. Consulta condiciones de la oferta.
+              </p>
+              <p className="mt-4">
+                © {new Date().getFullYear()} Lowi Fan. Todos los derechos reservados.
+              </p>
+            </div>
+          </footer>
+        );
+        
+        
+        // --- APP PRINCIPAL (principal.jsx) ---
+        const App = () => {
+          return (
+            <div className={`font-sans ${TEXT_COLOR} antialiased`}>
+              <HeroSection />
+              <FeaturesSection />
+              <PriceDetailCTA />
+              <FinalCTA />
+              <Footer />
+            </div>
+          );
+        };
+        
+        // Renderizar la aplicación en el DOM
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+        // --- FIN DEL CÓDIGO REACT/JSX ---
+    </script>
+</body>
+</html>
