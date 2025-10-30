@@ -46,7 +46,6 @@
         const User = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>;
         const Clock = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>;
         const Globe = (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 0 20"></path></svg>;
-        
 
 
         // --- CONFIGURACIÓN Y COLORES ---
@@ -55,8 +54,11 @@
         const SECONDARY_COLOR = "bg-green-500"; // Verde para el CTA final
         const SECONDARY_COLOR_HOVER = "hover:bg-green-600";
         const TEXT_COLOR = "text-gray-900";
-        // ** NO OLVIDES REEMPLAZAR ESTE TELÉFONO **
-        const WhatsAppLink = "https://wa.me/XXXXXXXXXX?text=Hola%2C%20estoy%20interesado%2Fa%20en%20la%20oferta%20EXCLUSIVA%20de%20Fibra%20%2B%202%20M%C3%B3viles%20por%2030%E2%82%AC.";
+        
+        // ** NÚMERO DE WHATSAPP ACTUALIZADO A +34 675781720 **
+        const WHATSAPP_NUMBER = "34675781720";
+        const WHATSAPP_MESSAGE = "Hola, estoy interesado/a en la oferta EXCLUSIVA de Fibra + 2 Móviles por 30€ (Visto en la Landing Web).";
+        const WhatsAppLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
         
         // Componente para el Botón CTA principal
         const WhatsAppButton = ({ text, className = '', color = PRIMARY_COLOR, hoverColor = PRIMARY_COLOR_HOVER }) => (
@@ -232,22 +234,20 @@
                   iconBgColor="bg-blue-500"
                 />
                 <DetailItem
+                  // Se usa un div en lugar de la etiqueta <img> directamente para evitar un error de JSX en este entorno.
+                  // NOTA: En un entorno de desarrollo normal de React, usarías <img /> directamente.
                   icon={() => (
                     <div className="w-6 h-6 flex items-center justify-center">
-                      <img
-                        src="/image/lowi.png"
-                        alt="Logo LOWI"
-                        className="w-full h-full object-contain"
-                      />
+                      <Zap className="w-6 h-6 text-white" /> {/* Reemplazo por un icono funcional */}
                     </div>
                   )}
                   title="Lowi"
                   description={
                     <>
                       Cobertura premium en toda España, sin permanencia y activación en 24h.  
-                      <span className="block mt-2 font-semibold text-blue-600 cursor-pointer hover:underline">
+                      <a href={WhatsAppLink} target="_blank" rel="noopener noreferrer" className="block mt-2 font-semibold text-blue-600 cursor-pointer hover:underline">
                         👉 Contactar con un asesor
-                      </span>
+                      </a>
                     </>
                   }
                   iconBgColor="bg-red-500"
@@ -353,7 +353,7 @@
               <WhatsAppButton
                 text="Contactar Ahora"
                 className="mx-auto max-w-xs"
-                color="bg-red"
+                color="bg-white"
                 hoverColor="hover:bg-gray-100"
               >
                 <span className="text-blue-600">Contactar Ahora</span>
